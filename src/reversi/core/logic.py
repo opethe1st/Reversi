@@ -1,5 +1,7 @@
+from collections import Counter
+
 from .board import Board, Colours
-from .position import Position, Directions
+from .position import Directions, Position
 
 
 #  should be here or should it be in board.py?
@@ -36,3 +38,7 @@ def _compute_valid_move(colour_position, direction, board, colour):
             other_colour_seen = True
         current_position = Position(x=current_position.x+direction.dx, y=current_position.y+direction.dy)
     return False
+
+
+def compute_score(board):
+    return Counter([piece.colour for _, piece in board if piece])

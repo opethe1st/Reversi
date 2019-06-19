@@ -1,7 +1,7 @@
 from reversi.core.board import Colours, Piece
 
 
-REP_TO_PIECE ={
+REP_TO_PIECE = {
     'W': Colours.WHITE,
     'B': Colours.BLACK,
     ' ': None,

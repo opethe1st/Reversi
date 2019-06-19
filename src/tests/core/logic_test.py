@@ -1,19 +1,19 @@
 from unittest import TestCase
 
-from tests.utils import construct_pieces
-
 from reversi.core.board import Board, Colours
 from reversi.core.logic import (
     _compute_valid_move,
     _get_positions_with_colour,
+    compute_score,
     compute_valid_moves
 )
 from reversi.core.position import Directions, Position
+from tests.utils import construct_pieces
 
 
-class TestComputeValidMoves(TestCase):
+class LogicTestCase(TestCase):
 
-    def test_simple_case_white(self):
+    def setUp(self):
         board_rep = "\n".join([
             '    ',
             ' BW ',
@@ -22,7 +22,12 @@ class TestComputeValidMoves(TestCase):
 
         ])
         pieces = construct_pieces(board_rep)
-        valid_moves = compute_valid_moves(board=Board(pieces), colour=Colours.WHITE)
+        self.board = Board(pieces)
+
+class TestComputeValidMoves(LogicTestCase):
+
+    def test_simple_case_white(self):
+        valid_moves = compute_valid_moves(board=self.board, colour=Colours.WHITE)
         expected_moves = set([
             Position(1, 0),
             Position(0, 1),
@@ -32,15 +37,7 @@ class TestComputeValidMoves(TestCase):
         self.assertSetEqual(valid_moves, expected_moves)
 
     def test_simple_case_black(self):
-        board_rep = "\n".join([
-            '    ',
-            ' BW ',
-            ' WB ',
-            '    ',
-
-        ])
-        pieces = construct_pieces(board_rep)
-        valid_moves = compute_valid_moves(board=Board(pieces), colour=Colours.BLACK)
+        valid_moves = compute_valid_moves(board=self.board, colour=Colours.BLACK)
         expected_moves = set([
             Position(1, 3),
             Position(3, 1),
@@ -76,33 +73,14 @@ class TestComputeValidMoves(TestCase):
         self.assertSetEqual(valid_moves, expected_moves)
 
 
-class TestGetPositionsWithColour(TestCase):
+class TestGetPositionsWithColour(LogicTestCase):
 
     def test_basic(self):
-        board_rep = "\n".join([
-            '    ',
-            ' BW ',
-            ' WB ',
-            '    ',
-
-        ])
-        pieces = construct_pieces(board_rep)
-        positions = _get_positions_with_colour(board=Board(pieces), colour=Colours.WHITE)
+        positions = _get_positions_with_colour(board=self.board, colour=Colours.WHITE)
         expected_positions = {Position(1, 2), Position(2, 1)}
 
 
-class TestComputeValidMove(TestCase):
-
-    def setUp(self):
-        board_rep = "\n".join([
-            '    ',
-            ' BW ',
-            ' WB ',
-            '    ',
-
-        ])
-        pieces = construct_pieces(board_rep)
-        self.board = Board(pieces)
+class TestComputeValidMove(LogicTestCase):
 
     def test_basic(self):  # :)
         valid_move = _compute_valid_move(
@@ -139,3 +117,11 @@ class TestComputeValidMove(TestCase):
             colour=Colours.WHITE
         )
         self.assertEqual(Position(1, 0), valid_move)
+
+
+class TestScore(LogicTestCase):
+
+    def test_score(self):
+        score = compute_score(self.board)
+        expected_score = {Colours.BLACK: 2, Colours.WHITE: 2}
+        self.assertDictEqual(score, expected_score)
