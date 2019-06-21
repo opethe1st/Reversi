@@ -17,7 +17,7 @@ class Direction:
         return Direction(dx=self.dx+other.dx, dy=self.dy+other.dy)
 
 
-# this(naming Enums with plurals) worked out pretty nicely!
+# this(naming Enums with plurals) worked out pretty nicely or did it!?
 class Directions(Enum):
     NORTH = Direction(dy=-1)
     WEST = Direction(dx=1)
