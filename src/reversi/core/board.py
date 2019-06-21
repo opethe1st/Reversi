@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from enum import Enum
 from typing import List
+
 from reversi.utils import Enum
+
 from .position import Position
 
 
@@ -38,3 +39,9 @@ class Board:
     def get_piece_at_position(self, position):
         # TODO(ope): better error message here
         return self._pieces[position.x][position.y]
+
+    def set_piece_at_position(self, position, piece):
+        # TODO(ope): better error message here
+        self._pieces[position.x][position.y] = piece
+
+    # TODO(ope): maybe a repr here? - add one that has colours? or symbols?
