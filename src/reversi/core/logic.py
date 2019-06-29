@@ -1,6 +1,6 @@
 from collections import Counter, defaultdict
 from typing import Dict, List, Set, Tuple, Union
-from itertools import cycle
+
 from .board import Board, Colours, Piece
 from .position import Directions, Position
 
@@ -67,52 +67,3 @@ def _capture_pieces(start: int, end: int, direction: Directions, colour: Colours
 
 def is_game_over(board):
     return all(not(compute_valid_moves(board=board, colour=colour)) for colour in Colours.ALL)
-
-
-def print_board(board):
-    def print_row(row):
-        line = '|'
-        colour_to_symbol = {
-            Colours.WHITE: 'W',
-            Colours.BLACK: 'B',
-        }
-        for piece in row:
-            if piece is None:
-                line += ' '
-            else:
-                line += colour_to_symbol[piece.colour]
-        line += '|'
-        print(line)
-
-    print(' ----')
-    for row in board._pieces:
-        print_row(row)
-    print(' ----')
-    print()
-
-
-def play_game():
-    players = [Colours.BLACK, Colours.WHITE]
-    board = Board(
-        [
-            [None, None, None, None],
-            [None, Piece(Colours.WHITE), Piece(Colours.BLACK), None],
-            [None, Piece(Colours.BLACK), Piece(Colours.WHITE), None],
-            [None, None, None, None],
-        ]
-    )
-    for player in cycle(players):
-        if is_game_over(board):
-            print(compute_score(board))
-            break
-        print_board(board)
-        if compute_valid_moves(board, player):
-            x, y = input(f"It is player: {player}'s turn. Input a position to move to: ").split()
-            #  should also check if there is a invalid move and prompt player to retry or hint on what the valid moves are.
-            play_move(board=board, position=Position(int(x), int(y)), colour=player)
-        else:
-            print(f"Skipped player: {player}'s turn since they have no valid move")
-
-
-if __name__ == '__main__':
-    play_game()
