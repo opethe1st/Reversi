@@ -25,7 +25,7 @@ class LogicTestCase(TestCase):
 # class TestComputeValidMoves(LogicTestCase):
 
 #     def test_simple_case_white(self):
-#         valid_moves = compute_valid_moves(board=self.board, colour=Player.WHITE)
+#         valid_moves = compute_valid_moves(board=self.board, colour=Player.ONE)
 #         expected_moves = {
 #             Position(1, 0): [(Position(1, 2), CardinalDirection.NORTH)],
 #             Position(0, 1): [(Position(2, 1), CardinalDirection.EAST)],
@@ -35,7 +35,7 @@ class LogicTestCase(TestCase):
 #         self.assertDictEqual(valid_moves, expected_moves)
 
 #     def test_simple_case_black(self):
-#         valid_moves = compute_valid_moves(board=self.board, colour=Player.BLACK)
+#         valid_moves = compute_valid_moves(board=self.board, colour=Player.TWO)
 #         expected_moves = {
 #             Position(1, 3): [(Position(1, 1), CardinalDirection.SOUTH)],
 #             Position(3, 1): [(Position(1, 1), CardinalDirection.WEST)],
@@ -53,7 +53,7 @@ class LogicTestCase(TestCase):
 
 #         ])
 #         pieces = construct_pieces(board_rep)
-#         valid_moves = compute_valid_moves(board=Board(pieces), colour=Player.WHITE)
+#         valid_moves = compute_valid_moves(board=Board(pieces), colour=Player.ONE)
 #         expected_moves = dict()
 #         self.assertDictEqual(valid_moves, expected_moves)
 
@@ -66,7 +66,7 @@ class LogicTestCase(TestCase):
 
 #         ])
 #         pieces = construct_pieces(board_rep)
-#         valid_moves = compute_valid_moves(board=Board(pieces), colour=Player.WHITE)
+#         valid_moves = compute_valid_moves(board=Board(pieces), colour=Player.ONE)
 #         expected_moves = dict()
 #         self.assertDictEqual(valid_moves, expected_moves)
 
@@ -74,7 +74,7 @@ class LogicTestCase(TestCase):
 class TestGetPositionsWithColour(LogicTestCase):
 
     def test_basic(self):
-        positions = _get_positions_with_player_piece_piece(board=self.board, colour=Player.WHITE)
+        positions = _get_positions_with_player_piece_piece(board=self.board, colour=Player.ONE)
         expected_positions = {Position(1, 2), Position(2, 1)}
 
 
@@ -85,7 +85,7 @@ class TestComputeValidMove(LogicTestCase):
             position=Position(1, 1),
             direction=CardinalDirection.SOUTH,
             board=self.board,
-            colour=Player.BLACK
+            colour=Player.TWO
         )
         self.assertEqual(Position(1, 3), valid_move)
 
@@ -103,7 +103,7 @@ class TestComputeValidMove(LogicTestCase):
             position=Position(1, 1),
             direction=CardinalDirection.SOUTH,
             board=board,
-            colour=Player.BLACK
+            colour=Player.TWO
         )
         self.assertFalse(valid_move)
 
@@ -112,7 +112,7 @@ class TestComputeValidMove(LogicTestCase):
             position=Position(1, 2),
             direction=CardinalDirection.NORTH,
             board=self.board,
-            colour=Player.WHITE
+            colour=Player.ONE
         )
         self.assertEqual(Position(1, 0), valid_move)
 
@@ -121,14 +121,14 @@ class TestComputeValidMove(LogicTestCase):
 
 #     def test_score(self):
 #         score = compute_score(self.board)
-#         expected_score = {Player.BLACK: 2, Player.WHITE: 2}
+#         expected_score = {Player.TWO: 2, Player.ONE: 2}
 #         self.assertDictEqual(score, expected_score)
 
 
 # class TestPlayMove(LogicTestCase):
 
 #     def test_black_plays_valid_move(self):
-#         play_move(board=self.board, position=Position(3, 1), colour=Player.BLACK)
+#         play_move(board=self.board, position=Position(3, 1), colour=Player.TWO)
 #         expected_board = Board(
 #             construct_pieces(
 #                 "\n".join([
@@ -145,7 +145,7 @@ class TestComputeValidMove(LogicTestCase):
 #         )
 
 #     def test_black_plays_valid_move_2(self):
-#         play_move(board=self.board, position=Position(1, 3), colour=Player.BLACK)
+#         play_move(board=self.board, position=Position(1, 3), colour=Player.TWO)
 #         expected_board = Board(
 #             construct_pieces(
 #                 "\n".join([
@@ -162,7 +162,7 @@ class TestComputeValidMove(LogicTestCase):
 #         )
 
 #     def test_white_plays_valid_move(self):
-#         play_move(board=self.board, position=Position(3, 2), colour=Player.WHITE)
+#         play_move(board=self.board, position=Position(3, 2), colour=Player.ONE)
 #         expected_board = Board(
 #             construct_pieces(
 #                 "\n".join([
@@ -179,7 +179,7 @@ class TestComputeValidMove(LogicTestCase):
 #         )
 
 #     def test_white_plays_valid_move_2(self):
-#         play_move(board=self.board, position=Position(0, 1), colour=Player.WHITE)
+#         play_move(board=self.board, position=Position(0, 1), colour=Player.ONE)
 #         expected_board = Board(
 #             construct_pieces(
 #                 "\n".join([
@@ -196,8 +196,8 @@ class TestComputeValidMove(LogicTestCase):
 #         )
 
 #     def test_play_moves(self):
-#         play_move(board=self.board, position=Position(0, 1), colour=Player.WHITE)
-#         play_move(board=self.board, position=Position(0, 2), colour=Player.BLACK)
+#         play_move(board=self.board, position=Position(0, 1), colour=Player.ONE)
+#         play_move(board=self.board, position=Position(0, 2), colour=Player.TWO)
 #         expected_board = Board(
 #             construct_pieces(
 #                 "\n".join([

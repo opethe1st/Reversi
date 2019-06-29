@@ -2,8 +2,8 @@ from reversi.core.board import Player, Piece
 
 
 REP_TO_PIECE = {
-    'W': Player.WHITE,
-    'B': Player.BLACK,
+    'W': Player.ONE,
+    'B': Player.TWO,
     ' ': None,
 }
 

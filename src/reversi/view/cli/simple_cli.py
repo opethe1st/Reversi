@@ -6,21 +6,23 @@ from reversi.view import UI
 
 class SimpleCLI(UI):
 
+    def __init__(self):
+        self._player_to_symbol = {
+            Player.ONE: 'W',
+            Player.TWO: 'B',
+        }
+
     def get_move(self, player) -> Tuple[int, int]:
         return map(int, input(f"It is player: {player}'s turn. Input a position to move to: ").split())
 
     def display_board(self, board):
         def print_row(row):
             line = '|'
-            player_to_symbol = {
-                Player.WHITE: 'W',
-                Player.BLACK: 'B',
-            }
             for piece in row:
                 if piece is None:
                     line += ' '
                 else:
-                    line += player_to_symbol[piece.player]
+                    line += self._player_to_symbol[piece.player]
             line += '|'
             print(line)
 
@@ -36,3 +38,8 @@ class SimpleCLI(UI):
 
     def display_skip_move(self, player):
         print(f"Skipped player: {player}'s turn since they have no valid move")
+
+    def select_player_colour(player, colour):
+        if player not in Player.ALL:
+            print('unknown player')
+        self._player_to_symbol[player] = colour

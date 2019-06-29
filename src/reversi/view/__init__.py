@@ -18,3 +18,7 @@ class UI(ABC):
     @abstractmethod
     def display_skip_move(player):
         pass
+
+    @abstractmethod
+    def select_player_colour(player, colour):
+        pass

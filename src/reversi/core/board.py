@@ -6,11 +6,9 @@ from reversi.utils import Enum
 from .position import Position
 
 
-# is it a nice convention for enums have plurals as names?
-# can do some metaclasses magic here so we never have to defined ALL.
 class Player(Enum):
-    BLACK = 'BLACK'
-    WHITE = 'WHITE'
+    ONE = 'ONE'
+    TWO = 'TWO'
 
 
 @dataclass
