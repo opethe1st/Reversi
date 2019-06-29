@@ -1,5 +1,3 @@
-from itertools import cycle
-
 from reversi import Game
 from reversi.view.cli import SimpleCLI
 

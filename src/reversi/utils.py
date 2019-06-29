@@ -19,7 +19,8 @@ class _EnumMeta(type):
         result = type.__new__(cls, name, bases, dict(classdict))
         result.ALL = classdict.ALL
         for base in bases:
-            if issubclass(base, Enum) and getattr(base, 'ALL'): # Update with ALL from the super classes.
+            # Update with ALL from the super classes.
+            if issubclass(base, Enum) and getattr(base, 'ALL'):
                 result.ALL |= getattr(base, 'ALL')
         return result
 

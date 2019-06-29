@@ -1,9 +1,13 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List
 
 from reversi.utils import Enum
 
 from .position import Position
+
+
+# I have to use this since my Enum type is not recognized by mypy yet
+PlayerType = str
 
 
 class Player(Enum):
@@ -13,13 +17,13 @@ class Player(Enum):
 
 @dataclass
 class Piece:
-    player: Player
+    player: PlayerType
 
 
 @dataclass
 class Board:
 
-    _pieces: List[List["Piece"]]
+    _pieces: List[List[Piece]]
 
     def __post_init__(self):
         # TODO(ope): validate pieces

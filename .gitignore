@@ -1,3 +1,4 @@
 .pytest*
 src/.venv*
 *.pyc
+.mypy*

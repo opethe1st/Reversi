@@ -8,17 +8,17 @@ class UI(ABC):
         pass
 
     @abstractmethod
-    def display_board(self, board):
+    def display_board(self, board, score_counter):
         pass
 
     @abstractmethod
-    def display_score(self, score_counter):
+    def display_game_over(self, score_counter):
         pass
 
     @abstractmethod
-    def display_skip_move(player):
+    def display_skip_move(self, player):
         pass
 
     @abstractmethod
-    def select_player_colour(player, colour):
+    def select_player_colour(self, player, colour):
         pass
