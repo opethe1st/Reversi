@@ -8,14 +8,14 @@ from .position import Position
 
 # is it a nice convention for enums have plurals as names?
 # can do some metaclasses magic here so we never have to defined ALL.
-class Colours(Enum):
+class Player(Enum):
     BLACK = 'BLACK'
     WHITE = 'WHITE'
 
 
 @dataclass
 class Piece:
-    colour: Colours
+    player: Player
 
 
 @dataclass
@@ -44,4 +44,4 @@ class Board:
         # TODO(ope): better error message here
         self._pieces[position.x][position.y] = piece
 
-    # TODO(ope): maybe a repr here? - add one that has colours? or symbols?
+    # TODO(ope): maybe a repr here? - add one that has Player? or symbols?
