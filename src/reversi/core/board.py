@@ -10,6 +10,7 @@ class Piece:
     player: Player
 
 
+@dataclass
 class Board:
 
     def __init__(self, pieces: List[List[Optional[Piece]]]) -> None:
@@ -35,9 +36,6 @@ class Board:
     def set_piece_at_position(self, position: Position, piece: Piece) -> None:
         # TODO(ope): better error message here
         self._pieces[position.x][position.y] = piece
-
-    def __eq__(self, other):
-        return self._pieces == other._pieces
 
     # TODO(ope): maybe a repr here? - add one that has Player? or symbols?
 
