@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from reversi.utils import Enum
+from enum import Enum
 
 
 @dataclass(unsafe_hash=True)

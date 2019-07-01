@@ -82,13 +82,13 @@ class TestGetPositionsWithplayer(LogicTestCase):
 class TestComputeValidMove(LogicTestCase):
 
     def test_basic(self):  # :)
-        valid_move = _compute_valid_move(
+        move, is_valid = _compute_valid_move(
             position=Position(1, 1),
             direction=CardinalDirection.SOUTH,
             board=self.board,
             player=Player.TWO
         )
-        self.assertEqual(Position(1, 3), valid_move)
+        self.assertEqual(Position(1, 3), move)
 
     def test_basic_2(self):  # :)
         board_rep = "\n".join([
@@ -100,22 +100,22 @@ class TestComputeValidMove(LogicTestCase):
         ])
         pieces = construct_pieces(board_rep)
         board = Board(pieces)
-        valid_move = _compute_valid_move(
+        move, is_valid = _compute_valid_move(
             position=Position(1, 1),
             direction=CardinalDirection.SOUTH,
             board=board,
             player=Player.TWO
         )
-        self.assertFalse(valid_move)
+        self.assertFalse(move)
 
     def test_basic_3(self):  # :)
-        valid_move = _compute_valid_move(
+        move, is_valid = _compute_valid_move(
             position=Position(1, 2),
             direction=CardinalDirection.NORTH,
             board=self.board,
             player=Player.ONE
         )
-        self.assertEqual(Position(1, 0), valid_move)
+        self.assertEqual(Position(1, 0), move)
 
 
 # class TestScore(LogicTestCase):

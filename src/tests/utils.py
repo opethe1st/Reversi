@@ -7,6 +7,7 @@ REP_TO_PIECE = {
     ' ': None,
 }
 
+
 def construct_pieces(board_rep):
     rows = board_rep.split('\n')
     assert len(rows) == len(rows[0])
@@ -21,8 +22,3 @@ def construct_pieces(board_rep):
         pieces.append(pieces_row)
     return pieces
 
-    # return [
-    #     [Piece(colour=REP_TO_PIECE[piece]) for piece in row if piece != ' ' else None]
-    #     for row in rows
-    # ]
-    #  the above is invalid syntax.. SMH!

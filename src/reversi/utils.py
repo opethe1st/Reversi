@@ -1,4 +1,3 @@
-
 class _member_table(dict):
     def __init__(self):
         self.ALL = set()
