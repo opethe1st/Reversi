@@ -5,3 +5,4 @@ src/.venv*
 *tox*
 htmlcov*
 *egg-info*
+.coverage
