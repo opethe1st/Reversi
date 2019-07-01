@@ -26,6 +26,7 @@ def update_display(func):
 
 # TODO(Ope): Remove all the magic constants
 # TODO(Ope): Is it useful to make a metaclass of this so that update display is called after every method here by default + a decorator to turn if off?
+#  TODO(Ope): better display, say have fixed dimensions and adjust pieces to fit those dimensions
 class PygameUI(UI):
 
     def __init__(self, board):
@@ -98,7 +99,7 @@ def draw_circle(screen, size: int, position: Position, colour: Colour):
     pygame.gfxdraw.aacircle(screen, int(x * size), int(y * size), size//2 - 2, colour)
 
 
-def get_clicked_ball(width, height, size: int) -> Tuple[Optional[Position], bool]:
+def get_clicked_ball(width: int, height: int, size: int) -> Tuple[Optional[Position], bool]:
     x1, y1 = pygame.mouse.get_pos()
     # TODO(ope): remove constants
     for x in range(width):
