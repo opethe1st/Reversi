@@ -6,10 +6,10 @@ env: TOXENV=py
 matrix:
   include:
     - python: 3.6
-      env: TOXENV=runtests,codecov
+      env: TOXENV=tests,codecov
     - python: 3.7
       dist: xenial
-      env: TOXENV=runtests,codecov
+      env: TOXENV=tests,codecov
 
 install:
   - pip install tox-travis
