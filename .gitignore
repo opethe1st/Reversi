@@ -1,4 +1,7 @@
 .pytest*
 src/.venv*
 *.pyc
-.mypy*
+*.mypy*
+*tox*
+htmlcov*
+*egg-info*

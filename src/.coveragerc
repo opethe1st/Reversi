@@ -1,0 +1,11 @@
+[run]
+omit =
+    *constants.py
+    # don't test anything in view at least for now
+    # TODO(ope): is it possible to add tests to views? I currently don't know anyway how, except by creating an exclude python game client and mocking, which seems unnecessary
+    */view/*
+    *__init__.py
+[report]
+exclude_lines =
+    pass
+    raise .*Exception

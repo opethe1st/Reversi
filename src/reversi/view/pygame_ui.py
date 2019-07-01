@@ -3,12 +3,12 @@ from dataclasses import dataclass
 from functools import wraps
 from typing import Optional, Tuple
 
-import pygame
-import pygame.gfxdraw
-import pygame.locals
+import pygame  # type: ignore
+import pygame.gfxdraw  # type: ignore
+import pygame.locals  # type: ignore
 
-from reversi.core import Board, Position
-from reversi.core import Piece, Player
+from reversi.core import Position
+from reversi.core import Player
 
 from .ui import UI
 from .constants import Colour
@@ -32,9 +32,17 @@ class PygameUI(UI):
         self._board = board
         pygame.init()
         pygame.display.set_caption('Reversi!')
-        self.board_dimensions = (400, 550)
-        self.screen = pygame.display.set_mode(self.board_dimensions)
-        self.size = 100
+
+        self.piece_size = 50
+        self.board_width = self._board.size * self.piece_size
+        self.board_height = self.board_width
+
+        self.game_width = self.board_width
+        self.score_board_height = 150
+        self.game_height = board.size * self.piece_size + self.score_board_height  # need a better name than score_board_height
+
+        self.screen = pygame.display.set_mode((self.game_width, self.game_height))
+
         self.colour_map = {
             Player.ONE: Colour.BLUE.value,
             Player.TWO: Colour.RED.value
@@ -43,25 +51,25 @@ class PygameUI(UI):
     @update_display
     def display_board(self):
         # draw the background
-        pygame.draw.rect(self.screen, Colour.WHITE.value, pygame.Rect(0, 0, 400, 400), 0)
+        pygame.draw.rect(self.screen, Colour.WHITE.value, pygame.Rect(0, 0, self.board_height, self.board_width))
 
         for position, piece in self._board:
             if piece:
                 draw_circle(
                     screen=self.screen,
-                    size=self.size,
+                    size=self.piece_size,
                     position=position,
                     colour=self.colour_map[piece.player]
                 )
 
+    # TODO(ope): remove type hints so it inherits from parent class
     @update_display
     def get_move(self, player) -> Tuple[Optional[Position], bool]:
         # block till a move is made
-        # print('get-move', player)
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.locals.MOUSEBUTTONDOWN:
-                    position, is_clicked = get_clicked_ball(size=self.size)
+                    position, is_clicked = get_clicked_ball(width=self._board.size, height=self._board.size, size=self.piece_size)
                     return position, is_clicked
         return None, False  # TODO(ope); fix, it shouldn't get here
 
@@ -77,79 +85,26 @@ class PygameUI(UI):
     def select_player_colour(self, player, colour):
         pass
 
+    # TODO(ope) Implement this
     @update_display
     def display_scores(self, scores):
         print(scores)
 
 
 # maybe make this is part of a pygame client and then have the UI built on top of it? But I suspect that will be too much abstraction
-def draw_circle(screen, size, position: Position, colour: Colour):
+def draw_circle(screen, size: int, position: Position, colour: Colour):
     y, x = position.x + 0.5, position.y + 0.5
     pygame.gfxdraw.filled_circle(screen, int(x * size), int(y * size), size//2 - 2, colour)
     pygame.gfxdraw.aacircle(screen, int(x * size), int(y * size), size//2 - 2, colour)
 
 
-def get_clicked_ball(size) -> Tuple[Optional[Position], bool]:
+def get_clicked_ball(width, height, size: int) -> Tuple[Optional[Position], bool]:
     x1, y1 = pygame.mouse.get_pos()
     # TODO(ope): remove constants
-    for x in range(4):
-        for y in range(4):
+    for x in range(width):
+        for y in range(height):
             x2, y2 = (x + 0.5) * size, (y + 0.5) * size
             distance = math.hypot(x1 - x2, y1 - y2)
             if distance <= size//2:
                 return Position(y, x), True  # TODO(ope); make this clearer
     return None, False
-
-
-# event stuff
-# TODO(ope): Is this needed?
-class Event:
-    pass
-
-
-@dataclass
-class PositionClickedEvent(Event):
-    position: Position
-
-
-class GameQuit(Event):
-    pass
-
-
-def get_events(size):
-    events = []
-    for event in pygame.event.get():
-        if event.type == pygame.locals.QUIT:
-            events.append(GameQuit())
-        if event.type == pygame.locals.MOUSEBUTTONDOWN:
-            position, is_clicked = get_clicked_ball(size=size)
-            if is_clicked:
-                events.append(PositionClickedEvent(position=position))
-    return events
-
-
-if __name__ == '__main__':
-    # import sys
-    while True:
-        pygameUI = PygameUI(
-            board=Board(
-                pieces=[
-                    [None, None, None, None],
-                    # [Piece(Player.TWO), Piece(Player.ONE), Piece(Player.TWO), Piece(Player.TWO)],
-                    # [Piece(Player.ONE), Piece(Player.ONE), Piece(Player.TWO), Piece(Player.ONE)],
-                    # [Piece(Player.ONE), Piece(Player.ONE), Piece(Player.TWO), Piece(Player.ONE)],
-                    # [Piece(Player.ONE), Piece(Player.ONE), Piece(Player.TWO), Piece(Player.ONE)],
-                    [None, Piece(Player.ONE), Piece(Player.TWO), None],
-                    [None, Piece(Player.TWO), Piece(Player.ONE), None],
-                    [None, None, None, None],
-                ]
-            )
-        )
-        pygameUI.display_board()
-        events = get_events(size=pygameUI.size)
-        for event in events:
-            if isinstance(event, GameQuit):
-                pygame.quit()
-            elif isinstance(event, PositionClickedEvent):
-                print(event)
-        pygame.display.update()

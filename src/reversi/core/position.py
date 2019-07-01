@@ -26,3 +26,7 @@ class CardinalDirection(Enum):
     NORTH_EAST = NORTH + EAST
     SOUTH_EAST = SOUTH + EAST
     SOUTH_WEST = SOUTH + WEST
+
+
+def next_position_in_direction(position: Position, direction: Direction):
+    return Position(x=position.x+direction.dx, y=position.y+direction.dy)

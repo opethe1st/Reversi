@@ -36,16 +36,19 @@ class Board:
         # TODO(ope): better error message here
         self._pieces[position.x][position.y] = piece
 
+    def __eq__(self, other):
+        return self._pieces == other._pieces
+
     # TODO(ope): maybe a repr here? - add one that has Player? or symbols?
 
 
 # TODO(ope): make this work for different sizes
 def make_board(board_size=4):
-    return Board(
-        [
-            [None, None, None, None],
-            [None, Piece(Player.ONE), Piece(Player.TWO), None],
-            [None, Piece(Player.TWO), Piece(Player.ONE), None],
-            [None, None, None, None],
-        ]
-    )
+    pieces = [
+        [None for __ in range(board_size)] for _ in range(board_size)
+    ]
+    pieces[board_size//2-1][board_size//2-1] = Piece(Player.ONE)
+    pieces[board_size//2][board_size//2] = Piece(Player.ONE)
+    pieces[board_size//2-1][board_size//2] = Piece(Player.TWO)
+    pieces[board_size//2][board_size//2-1] = Piece(Player.TWO)
+    return Board(pieces=pieces)

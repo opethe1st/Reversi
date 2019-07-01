@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from reversi.core import Position
 from reversi.core.board import Player
 from reversi.view.ui import UI
@@ -12,7 +14,7 @@ class SimpleCLI(UI):
             Player.TWO: 'B',
         }
 
-    def get_move(self, player) -> Position:
+    def get_move(self, player) -> Tuple[Position, bool]:
         x, y = map(int, input(f"It is player: {player}'s turn. Input a position to move to: ").split())
         return Position(x, y), True
 

@@ -26,4 +26,4 @@ def run(board_size=4):
 
 
 if __name__ == '__main__':
-    run()
+    run(board_size=6)

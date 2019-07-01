@@ -1,3 +1,4 @@
+# pragma: no cover
 from enum import Enum
 
 
