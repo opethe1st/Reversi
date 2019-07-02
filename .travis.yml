@@ -7,6 +7,8 @@ python:
 
 env:
   - TOXENV=runtests,codecov,mypy
+  - TOXENV=codecov
+  - TOXENV=mypy
 
 
 install:
