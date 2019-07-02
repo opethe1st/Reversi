@@ -11,8 +11,8 @@ jobs:
       - image: circleci/python:3.6
     steps:
       - checkout
-      - run: pip install tox
-      - run: tox -e runtests -e codecov -e mypy
+      - run: sudo pip install tox
+      - run: cd src && tox -e runtests -e codecov -e mypy
 
 workflows:
   version: 2
