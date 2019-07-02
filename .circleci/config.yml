@@ -6,21 +6,21 @@ jobs:
     steps:
       - checkout
       - run: sudo pip install tox
-      - run: cd src/ && tox -e runtests -e codecov -e mypy
+      - run: cd src/ && tox -e runtests
   mypy:
     docker:
       - image: circleci/python:3.6
     steps:
       - checkout
       - run: sudo pip install tox
-      - run: cd src/ && tox -e runtests -e codecov -e mypy
+      - run: cd src/ && tox -e mypy
   codecov:
     docker:
       - image: circleci/python:3.6
     steps:
       - checkout
       - run: sudo pip install tox
-      - run: cd src/ && tox -e runtests -e codecov -e mypy
+      - run: cd src/ && tox -e codecov
 
 workflows:
   version: 2
