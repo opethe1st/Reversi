@@ -2,7 +2,7 @@
 src/.venv*
 *.pyc
 *.mypy*
-*tox*
+.tox*
 htmlcov*
 *egg-info*
 .coverage
