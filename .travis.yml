@@ -6,7 +6,7 @@ python:
   - "3.7"
 
 env:
-  - TOXENV=runtests,codecov,mypy
+  - TOXENV=runtests
   - TOXENV=codecov
   - TOXENV=mypy
 
