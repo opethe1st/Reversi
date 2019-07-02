@@ -12,7 +12,9 @@ jobs:
     steps:
       - checkout
       - run: sudo pip install tox
-      - run: cd src && tox -e runtests -e codecov -e mypy
+      - run: cd src/
+      - run: pwd
+      - run: tox -e runtests -e codecov -e mypy
 
 workflows:
   version: 2
