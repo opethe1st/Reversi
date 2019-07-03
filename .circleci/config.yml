@@ -1,31 +1,17 @@
 version: 2
 jobs:
-  tests:
+  checks:
     docker:
       - image: circleci/python:3.6
+      - image: circleci/python:3.7
     steps:
       - checkout
       - run: sudo pip install tox
-      - run: cd src/ && tox -e runtests
-  mypy:
-    docker:
-      - image: circleci/python:3.6
-    steps:
-      - checkout
-      - run: sudo pip install tox
-      - run: cd src/ && tox -e mypy
-  codecov:
-    docker:
-      - image: circleci/python:3.6
-    steps:
-      - checkout
-      - run: sudo pip install tox
-      - run: cd src/ && tox -e codecov
+      - run: cd src/ && tox
+
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - tests
-      - mypy
-      - codecov
+      - checks
