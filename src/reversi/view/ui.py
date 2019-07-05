@@ -13,10 +13,6 @@ class UI(ABC):
         pass
 
     @abstractmethod
-    def get_move(self, player: Player):
-        pass
-
-    @abstractmethod
     def display_board(self):
         pass
 
