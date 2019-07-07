@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
-from typing import Dict
+from collections import Counter
 
 from reversi.core import Board, Player
 
 from .constants import Colour
 
 
+# is this workable? - having this interface?
 class UI(ABC):
 
     @abstractmethod
@@ -29,5 +30,5 @@ class UI(ABC):
         pass
 
     @abstractmethod
-    def display_scores(self, scores: Dict):
+    def display_score_board(self, scores: Counter, player_to_play: Player):
         pass

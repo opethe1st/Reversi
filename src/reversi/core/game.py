@@ -38,7 +38,7 @@ class Game:
         positions = _get_positions_with_player_piece(board=self._board, player=player)
         moves: Dict[Position, List] = defaultdict(list)
         for position in positions:
-            for direction in CardinalDirection:  # type: ignore
+            for direction in CardinalDirection:
                 valid_position, is_valid = _compute_valid_move(
                     position=position,
                     direction=direction.value,

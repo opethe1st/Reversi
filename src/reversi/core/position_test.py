@@ -17,7 +17,7 @@ class AddDirection(DirectionTests):
 
 class NextPositionInDirection(TestCase):
 
-    # possibly too trivial tests but simpler stuff have broken before :)
+    # possibly too trivial tests but simpler things have broken before :)
     def test_direction_west(self):
         position = next_position_in_direction(position=Position(0, 0), direction=CardinalDirection.NORTH.value)
         assert position == Position(0, -1)

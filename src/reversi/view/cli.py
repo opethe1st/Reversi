@@ -5,7 +5,7 @@ from reversi.core.board import Player
 from reversi.view.ui import UI
 
 
-class SimpleCLI(UI):
+class CLI(UI):
 
     def __init__(self, board):
         self._board = board
