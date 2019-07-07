@@ -3,8 +3,6 @@ from collections import Counter
 
 from reversi.core import Board, Player
 
-from .constants import Colour
-
 
 # is this workable? - having this interface?
 class UI(ABC):
@@ -23,10 +21,6 @@ class UI(ABC):
 
     @abstractmethod
     def display_skip_move(self, player: Player):
-        pass
-
-    @abstractmethod
-    def select_player_colour(self, player: Player, colour: Colour):
         pass
 
     @abstractmethod

@@ -35,17 +35,12 @@ class CLI(UI):
         print(' ----')
         print()
 
-    def display_game_over(self, score_counter):
-        for player, score in score_counter.items():
-            print(f'player: {player} scored: {score}')
+    def display_game_over(self, scores):
+        print(f'player: {Player.ONE} scored: {scores[Player.ONE]}')
+        print(f'player: {Player.TWO} scored: {scores[Player.TWO]}')
 
     def display_skip_move(self, player):
         print(f"Skipped player: {player}'s turn since they have no valid move")
 
     def display_scores(self, scores):
         print(scores)
-
-    def select_player_colour(self, player, colour):
-        if player not in Player.ALL:
-            print('unknown player')
-        self._player_to_symbol[player] = colour

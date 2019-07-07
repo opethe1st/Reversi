@@ -26,19 +26,20 @@ def run(board_size=4):
                 sys.exit()
 
             elif event.type == pygame.locals.MOUSEBUTTONDOWN:
-                # I think there is real confusion with what is x and what is y
-                position, was_clicked = ui.get_clicked_ball(position=Position(x=event.pos[0], y=event.pos[1]))
+                # it is pos[1] corresponds to the x coordinate and pos[0] corresponds to the y-coordinate
+                position, was_clicked = ui.get_clicked_ball(position=Position(x=event.pos[1], y=event.pos[0]))
                 if was_clicked:
                     is_valid_move = game.play_move(player=player, position=position)
-                    ui.display_board()
                     if is_valid_move:
+                        # TODO(ope): should I have a function that calls both of these functions at the same time?
+                        ui.display_board()
                         player = next_player(player=player)
+                        ui.display_score_board(scores=game.compute_scores(), player_to_play=player)
                     # if there are no valid moves for the next player, skip their turn
                     if not game.compute_valid_moves(player=player):
                         player_to_play = next_player(player=player)
                         ui.display_skip_move(skipped_player=player, player_to_play=player_to_play)
                         player = player_to_play
-                    ui.display_score_board(scores=game.compute_scores(), player_to_play=player)
 
         if game.is_over():
             ui.display_game_over(scores=game.compute_scores())

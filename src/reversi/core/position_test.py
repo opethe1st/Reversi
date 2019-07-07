@@ -1,6 +1,11 @@
 from unittest import TestCase
 
-from .position import Direction, CardinalDirection, next_position_in_direction, Position
+from .position import (
+    CardinalDirection,
+    Direction,
+    Position,
+    next_position_in_direction
+)
 
 
 class DirectionTests(TestCase):

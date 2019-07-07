@@ -72,8 +72,8 @@ class GUI(UI):
                 x2, y2 = (x + 0.5) * self.piece_size, (y + 0.5) * self.piece_size
                 distance = math.hypot(x1 - x2, y1 - y2)
                 if distance <= self.piece_size//2:
-                    return Position(y, x), True  # TODO(ope); make this clearer, why is it flipped
-        return None, False  # if clicked outside the board
+                    return Position(x, y), True
+        return None, False  # if clicked outside the board, return None
 
     @update_display
     def display_game_over(self, scores):
@@ -97,6 +97,7 @@ class GUI(UI):
             (self.board_width//2 - game_over_rect.width//2, self.board_height+game_over_rect.height+self.score_board_height//4),
         )
 
+    # TODO(ope): I am not sure this works, need to test
     @update_display
     def display_skip_move(self, skipped_player, player_to_play):
         pygame.draw.rect(self.screen, Colour.GREY.value, pygame.Rect(0, self.board_height, self.board_width, self.score_board_height))
@@ -111,11 +112,6 @@ class GUI(UI):
             players_turn,
             (self.board_width//2 - players_turn_rect.width//2, self.board_height+self.score_board_height//6),
         )
-
-    # TODO(ope): use this later!
-    @update_display
-    def select_player_colour(self, player, colour):
-        self.colour_map[player] = colour
 
     @update_display
     def display_score_board(self, scores, player_to_play):

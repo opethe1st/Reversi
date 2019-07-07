@@ -1,13 +1,9 @@
 from unittest import TestCase
 
-from .board import Board, Piece, Player, make_board, Position
-
-# Not using because flake complains
-# from .board import *  # using this form because I consider this an extension of the board file. Right perspective?
+from .board import Board, Piece, Player, Position, make_board
 
 
 # TODO(ope): create an extension that will create test scaffolding given a class
-# need to do s?
 class BoardTests(TestCase):
 
     def setUp(self):

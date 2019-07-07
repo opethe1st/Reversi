@@ -4,10 +4,10 @@ cache: pip
 matrix:
   include:
     - python: 3.6
-      env: TOXENV=runtests,codecov
+      env: TOXENV=runtests,codecov,lint
     - python: 3.7
       dist: xenial
-      env: TOXENV=runtests,codecov
+      env: TOXENV=runtests,codecov,lint
 
 install:
   - pip install tox-travis
