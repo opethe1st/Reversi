@@ -3,7 +3,12 @@ from typing import Dict, List, Optional, Set, Tuple
 
 from .board import Board, Piece
 from .player import Player
-from .position import CardinalDirection, Direction, Position
+from .position import (
+    CardinalDirection,
+    Direction,
+    Position,
+    next_position_in_direction
+)
 
 
 class Game:
@@ -33,7 +38,7 @@ class Game:
         positions = _get_positions_with_player_piece(board=self._board, player=player)
         moves: Dict[Position, List] = defaultdict(list)
         for position in positions:
-            for direction in CardinalDirection:  # type: ignore
+            for direction in CardinalDirection:
                 valid_position, is_valid = _compute_valid_move(
                     position=position,
                     direction=direction.value,
@@ -61,7 +66,7 @@ def _compute_valid_move(board: Board, position: Position, direction: Direction, 
             return current_position, True
         elif current_piece is not None and current_piece.player != player:
             other_player_seen = True
-        current_position = _next_position_in_direction(position=current_position, direction=direction)
+        current_position = next_position_in_direction(position=current_position, direction=direction)
     return None, False
 
 
@@ -69,10 +74,6 @@ def _capture_pieces(board: Board, start: Position, end: Position, direction: Dir
     position = start
     while position != end:
         board.set_piece_at_position(position=position, piece=Piece(player=player))
-        position = _next_position_in_direction(position=position, direction=direction)
+        position = next_position_in_direction(position=position, direction=direction)
     # set piece at the end too.
     board.set_piece_at_position(position=position, piece=Piece(player=player))
-
-
-def _next_position_in_direction(position: Position, direction: Direction):
-    return Position(x=position.x+direction.dx, y=position.y+direction.dy)

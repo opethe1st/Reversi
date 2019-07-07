@@ -1,6 +1,6 @@
 from .board import Board, Piece, make_board
 from .game import Game
-from .player import Player
+from .player import Player, next_player
 from .position import Position
 
 __all__ = [
@@ -10,4 +10,5 @@ __all__ = [
     'Player',
     'make_board',
     'Piece',
+    'next_player',
 ]

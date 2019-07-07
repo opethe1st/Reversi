@@ -1,19 +1,16 @@
 from abc import ABC, abstractmethod
-from typing import Dict
+from collections import Counter
 
 from reversi.core import Board, Player
 
-from .constants import Colour
 
-
+# TODO(ope) is this useful? This just captures displaying capabilities nothing about events
+# It would also be more useful, if we could make sure the concrete classes never violate this interface
+#  right now, it is just checks that the names of the methods are the same
 class UI(ABC):
 
     @abstractmethod
     def __init__(self, board: Board):
-        pass
-
-    @abstractmethod
-    def get_move(self, player: Player):
         pass
 
     @abstractmethod
@@ -29,9 +26,5 @@ class UI(ABC):
         pass
 
     @abstractmethod
-    def select_player_colour(self, player: Player, colour: Colour):
-        pass
-
-    @abstractmethod
-    def display_scores(self, scores: Dict):
+    def display_score_board(self, scores: Counter, player_to_play: Player):
         pass

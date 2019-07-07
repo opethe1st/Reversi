@@ -5,3 +5,7 @@ from enum import Enum
 class Player(Enum):
     ONE = 'ONE'
     TWO = 'TWO'
+
+
+def next_player(player):
+    return Player.TWO if player == Player.ONE else Player.ONE

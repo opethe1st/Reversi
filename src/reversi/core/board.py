@@ -10,6 +10,7 @@ class Piece:
     player: Player
 
 
+@dataclass
 class Board:
 
     def __init__(self, pieces: List[List[Optional[Piece]]]) -> None:
@@ -41,11 +42,11 @@ class Board:
 
 # TODO(ope): make this work for different sizes
 def make_board(board_size=4):
-    return Board(
-        [
-            [None, None, None, None],
-            [None, Piece(Player.ONE), Piece(Player.TWO), None],
-            [None, Piece(Player.TWO), Piece(Player.ONE), None],
-            [None, None, None, None],
-        ]
-    )
+    pieces = [
+        [None for __ in range(board_size)] for _ in range(board_size)
+    ]
+    pieces[board_size//2-1][board_size//2-1] = Piece(Player.ONE)
+    pieces[board_size//2][board_size//2] = Piece(Player.ONE)
+    pieces[board_size//2-1][board_size//2] = Piece(Player.TWO)
+    pieces[board_size//2][board_size//2-1] = Piece(Player.TWO)
+    return Board(pieces=pieces)
