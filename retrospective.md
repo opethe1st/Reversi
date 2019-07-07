@@ -13,7 +13,6 @@ I thought it would be a good idea for the CLI and GUI to share the same interfac
 
 #### Improvements
 This code has a lot of TODOs (which I kind of abused since some of them are not TODOs but just notes and thoughts i.e annotations) which I am going to ignore for now.
-I could have a view when the game starts when you can select which colour you want your player to be.
-I could written a layer on top of pygame that helps me write cleaner and more succinct code - I found pygame really cumbersome to work with and if I remember correctly it doesn't allow keyword arguments and I didn't get any hightlights when I hovered over the code
+* I could have a view when the game starts when you can select which colour you want your player to be.
+* I could written a layer on top of pygame that helps me write cleaner and more succinct code - I found pygame really cumbersome to work with and if I remember correctly it doesn't allow keyword arguments and I didn't get any hightlights when I hovered over the code
 The plus to writing the layer would be that my UI won't be devoid of any tests like it is right now. It was definitely harder to work with because I had to manually test and to be honest, I am not convinced it is devoid of bugs 😅.
-
