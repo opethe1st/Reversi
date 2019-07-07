@@ -38,7 +38,6 @@ class GetPieceAtPositionTest(BoardTests):
 class SetPieceAtPosition(BoardTests):
 
     def test_set_piece_at_position_piece(self):
-        # haha, this breaks my assert at the end approach
         assert self.board.get_piece_at_position(position=Position(0, 0)) is None
         self.board.set_piece_at_position(position=Position(0, 0), piece=Piece(Player.ONE))
         assert (
@@ -49,8 +48,7 @@ class SetPieceAtPosition(BoardTests):
 
 class MakeBoardTests(TestCase):
 
-    # TODO(ope)
-    # going to write extension so I can do remove the test prefix
+    # TODO(ope) going to write library that instead of using the test prefix, uses a decorator
     def test_board_size_4(self):
         assert (
             make_board(board_size=4)

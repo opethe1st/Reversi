@@ -1,6 +1,7 @@
 import sys
 
-import pygame  # I dont like that the fact that I am using pygame is leaking but I can't think of an alternative
+# I dont like that the fact that I am using pygame is leaking into my main.py but I can't think of an alternative
+import pygame
 import pygame.locals
 
 from reversi.core import Game, Player, Position, make_board
@@ -26,7 +27,7 @@ def run(board_size=4):
                 sys.exit()
 
             elif event.type == pygame.locals.MOUSEBUTTONDOWN:
-                # it is pos[1] corresponds to the x coordinate and pos[0] corresponds to the y-coordinate
+                # pos[1] corresponds to the x coordinate and pos[0] corresponds to the y-coordinate
                 position, was_clicked = ui.get_clicked_ball(position=Position(x=event.pos[1], y=event.pos[0]))
                 if was_clicked:
                     is_valid_move = game.play_move(player=player, position=position)
@@ -46,4 +47,5 @@ def run(board_size=4):
 
 
 if __name__ == '__main__':
+    # TODO(ope): UI that selects the board size
     run(board_size=8)

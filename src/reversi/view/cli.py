@@ -14,6 +14,7 @@ class CLI(UI):
             Player.TWO: 'B',
         }
 
+    # TODO(ope): This shouldn't be here - but fix later
     def get_move(self, player) -> Tuple[Position, bool]:
         x, y = map(int, input(f"It is player: {player}'s turn. Input a position to move to: ").split())
         return Position(x, y), True

@@ -4,7 +4,9 @@ from collections import Counter
 from reversi.core import Board, Player
 
 
-# is this workable? - having this interface?
+# TODO(ope) is this useful? This just captures displaying capabilities nothing about events
+# It would also be more useful, if we could make sure the concrete classes never violate this interface
+#  right now, it is just checks that the names of the methods are the same
 class UI(ABC):
 
     @abstractmethod
