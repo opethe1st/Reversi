@@ -17,7 +17,7 @@ def run(board_size=4):
     player = Player.ONE
 
     ui.display_board()
-    ui.display_score_board(scores=game.compute_scores(), player=player)
+    ui.display_score_board(scores=game.compute_scores(), player_to_play=player)
 
     while True:
         for event in pygame.event.get():
@@ -45,4 +45,4 @@ def run(board_size=4):
 
 
 if __name__ == '__main__':
-    run(board_size=4)
+    run(board_size=8)
